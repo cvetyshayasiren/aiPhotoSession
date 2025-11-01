@@ -18,32 +18,12 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import aiphotosession.composeapp.generated.resources.Res
 import aiphotosession.composeapp.generated.resources.compose_multiplatform
+import com.cvetyshayasiren.aiphotosession.ui.MainScreenView
 
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        val platform = remember { getPlatform() }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Hello!")
-            }
-            AnimatedVisibility(showContent) {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Hello AiPhotoSession ${platform.name}")
-                }
-            }
-        }
+        MainScreenView()
     }
 }
