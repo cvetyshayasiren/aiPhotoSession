@@ -1,6 +1,9 @@
 package com.cvetyshayasiren.aiphotosession.ui
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -12,16 +15,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import com.cvetyshayasiren.aiphotosession.Config
-import com.cvetyshayasiren.aiphotosession.data.ImageUris
+import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.theme.rubikMonoOne
+import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
+import com.cvetyshayasiren.aiphotosession.ui.utils.animated
 import com.github.panpf.sketch.AsyncImage
+import com.github.panpf.sketch.PainterState
+import com.github.panpf.sketch.SubcomposeAsyncImage
+import org.jetbrains.compose.resources.InternalResourceApi
 
+@OptIn(InternalResourceApi::class)
 @Composable
 fun NoirView(modifier: Modifier = Modifier) {
-
     val animateFloat = remember { Animatable(-4f) }
 
     LaunchedEffect(Unit) {
@@ -49,10 +58,19 @@ fun NoirView(modifier: Modifier = Modifier) {
             color = MaterialTheme.colorScheme.primary
         )
 
+        NamesView()
+        Config.defaultSpacer()
+        FourSquareView(modifier = Modifier.fillMaxSize(.6f))
+        Config.defaultSpacer()
+        ShapesView()
+
         AsyncImage(
             modifier = Modifier
-                .shadow(elevation = Config.shadowElevation),
-            uri = ImageUris.DUB_NOIR_1.getUri(),
+                .shadow(elevation = Config.shadowElevation)
+                .animateContentSize()
+                .aspectRatio(ImageOpt.DUB_NOIR_1.getRatio())
+            ,
+            uri = ImageOpt.DUB_NOIR_1.getUri(),
             contentDescription = "photo"
         )
 
@@ -72,20 +90,22 @@ fun NoirView(modifier: Modifier = Modifier) {
         FlowRow {
             AsyncImage(
                 modifier = Modifier
+                    .animated()
                     .shadow(elevation = Config.shadowElevation),
-                uri = ImageUris.DUB_NOIR_2.getUri(),
+                uri = ImageOpt.DUB_NOIR_2.getUri(),
+                contentDescription = "photo"
+            )
+            AsyncImage(
+                modifier = Modifier
+                    .animated()
+                    .shadow(elevation = Config.shadowElevation),
+                uri = ImageOpt.VI_NOIR_9.getUri(),
                 contentDescription = "photo"
             )
             AsyncImage(
                 modifier = Modifier
                     .shadow(elevation = Config.shadowElevation),
-                uri = ImageUris.VI_NOIR_9.getUri(),
-                contentDescription = "photo"
-            )
-            AsyncImage(
-                modifier = Modifier
-                    .shadow(elevation = Config.shadowElevation),
-                uri = ImageUris.DUB_NOIR_5.getUri(),
+                uri = ImageOpt.DUB_NOIR_5.getUri(),
                 contentDescription = "photo"
             )
             Text(
@@ -100,7 +120,7 @@ fun NoirView(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .clip(Config.defaultRoundedShape)
                     .shadow(elevation = Config.shadowElevation),
-                uri = ImageUris.VI_NOIR_1.getUri(),
+                uri = ImageOpt.VI_NOIR_1.getUri(),
                 contentDescription = "photo"
             )
         }
@@ -125,7 +145,7 @@ fun NoirView(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .clip(Config.defaultRoundedShape)
                 .shadow(elevation = Config.shadowElevation),
-            uri = ImageUris.DUB_NOIR_7.getUri(),
+            uri = ImageOpt.DUB_NOIR_7.getUri(),
             contentDescription = "photo"
         )
         Config.defaultSpacer()
@@ -140,7 +160,7 @@ fun NoirView(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .clip(Config.defaultRoundedShape)
                 .shadow(elevation = Config.shadowElevation),
-            uri = ImageUris.VI_NOIR_0.getUri(),
+            uri = ImageOpt.VI_NOIR_0.getUri(),
             contentDescription = "photo"
         )
         Config.defaultSpacer()
@@ -161,35 +181,35 @@ fun NoirView(modifier: Modifier = Modifier) {
                     }
                     .clip(Config.defaultRoundedShape)
                     .shadow(elevation = Config.shadowElevation),
-                uri = ImageUris.VI_NOIR_2.getUri(),
+                uri = ImageOpt.VI_NOIR_2.getUri(),
                 contentDescription = "photo"
             )
             AsyncImage(
                 modifier = Modifier
                     .clip(Config.defaultRoundedShape)
                     .shadow(elevation = Config.shadowElevation),
-                uri = ImageUris.DUB_NOIR_6.getUri(),
+                uri = ImageOpt.DUB_NOIR_6.getUri(),
                 contentDescription = "photo"
             )
             AsyncImage(
                 modifier = Modifier
                     .clip(Config.defaultRoundedShape)
                     .shadow(elevation = Config.shadowElevation),
-                uri = ImageUris.VI_NOIR_6.getUri(),
+                uri = ImageOpt.VI_NOIR_6.getUri(),
                 contentDescription = "photo"
             )
             AsyncImage(
                 modifier = Modifier
                     .clip(Config.defaultRoundedShape)
                     .shadow(elevation = Config.shadowElevation),
-                uri = ImageUris.DUB_NOIR_9.getUri(),
+                uri = ImageOpt.DUB_NOIR_9.getUri(),
                 contentDescription = "photo"
             )
             AsyncImage(
                 modifier = Modifier
                     .clip(Config.defaultRoundedShape)
                     .shadow(elevation = Config.shadowElevation),
-                uri = ImageUris.VI_NOIR_7.getUri(),
+                uri = ImageOpt.VI_NOIR_7.getUri(),
                 contentDescription = "photo"
             )
         }

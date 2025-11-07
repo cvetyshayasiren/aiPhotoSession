@@ -18,7 +18,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.cvetyshayasiren.aiphotosession.Config
-import com.cvetyshayasiren.aiphotosession.data.ImageUris
+import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.theme.rubikMonoOne
 import com.github.panpf.sketch.AsyncImage
 import kotlinx.coroutines.CoroutineScope
@@ -30,7 +30,7 @@ fun CarouselView(
     modifier: Modifier = Modifier,
     scope: CoroutineScope = rememberCoroutineScope()
 ) {
-    val trashList = remember { ImageUris.getShuffledTrashList() }
+    val trashList = remember { ImageOpt.getShuffledTrashList() }
     val carouselState = rememberCarouselState(itemCount = {trashList.size})
 
     Config.defaultSpacer()

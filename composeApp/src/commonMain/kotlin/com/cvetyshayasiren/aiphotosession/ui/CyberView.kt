@@ -11,7 +11,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import com.cvetyshayasiren.aiphotosession.Config
-import com.cvetyshayasiren.aiphotosession.data.ImageUris
+import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.theme.rubikMonoOne
 import com.github.panpf.sketch.AsyncImage
 
@@ -57,7 +57,7 @@ fun CyberView(modifier: Modifier = Modifier) {
                     .clip(Config.defaultRoundedShape)
                     .shadow(elevation = Config.shadowElevation)
                     .aspectRatio(1f),
-                uri = ImageUris.DUB_CYBER_5.getUri(),
+                uri = ImageOpt.DUB_CYBER_5.getUri(),
                 contentDescription = "photo"
             )
             AsyncImage(
@@ -66,7 +66,7 @@ fun CyberView(modifier: Modifier = Modifier) {
                     .clip(Config.defaultRoundedShape)
                     .shadow(elevation = Config.shadowElevation)
                     .aspectRatio(1f),
-                uri = ImageUris.VI_CYBER_1.getUri(),
+                uri = ImageOpt.VI_CYBER_1.getUri(),
                 contentDescription = "photo"
             )
         }
@@ -92,14 +92,14 @@ fun CyberView(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .clip(Config.defaultRoundedShape)
                 .shadow(elevation = Config.shadowElevation),
-            uri = ImageUris.DUB_CYBER_0.getUri(),
+            uri = ImageOpt.DUB_CYBER_0.getUri(),
             contentDescription = "photo"
         )
         AsyncImage(
             modifier = Modifier
                 .clip(Config.defaultRoundedShape)
                 .shadow(elevation = Config.shadowElevation),
-            uri = ImageUris.DUB_CYBER_4.getUri(),
+            uri = ImageOpt.DUB_CYBER_4.getUri(),
             contentDescription = "photo"
         )
 
