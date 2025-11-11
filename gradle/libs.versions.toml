@@ -1,12 +1,13 @@
 [versions]
 androidx-lifecycle = "2.9.5"
-composeHotReload = "1.0.0-rc02"
+composeHotReload = "1.0.0-rc03"
 composeMultiplatform = "1.10.0-beta01"
 junit = "4.13.2"
 kotlin = "2.2.21"
 kotlinx-coroutines = "1.10.2"
 sketch = "4.4.0-alpha01"
 materialkolor = "4.0.3"
+haze = "1.6.10"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -18,9 +19,12 @@ kotlinx-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-s
 sketch-compose = { module = "io.github.panpf.sketch4:sketch-compose", version.ref = "sketch" }
 sketch-http = { module = "io.github.panpf.sketch4:sketch-http", version.ref = "sketch" }
 materialkolor = { module = "com.materialkolor:material-kolor", version.ref = "materialkolor" }
+haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
+haze-materials = { module = "dev.chrisbanes.haze:haze-materials", version.ref = "haze" }
 
 [bundles]
 sketch = ["sketch-compose", "sketch-http"]
+haze = ["haze", "haze-materials"]
 
 [plugins]
 composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }

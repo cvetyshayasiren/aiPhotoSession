@@ -1,7 +1,6 @@
-package com.cvetyshayasiren.aiphotosession.ui
+package com.cvetyshayasiren.aiphotosession.ui.widgets
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -13,12 +12,11 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.ColorFilter
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
-import com.github.panpf.sketch.request.ImageOptions
 
 @Composable
 fun FourSquareView(
     modifier: Modifier = Modifier,
-    photo: ImageOpt = ImageOpt.DUB_NOIR_0
+    photo: ImageOpt
 ) {
     Column(
         modifier = modifier.aspectRatio(1f),

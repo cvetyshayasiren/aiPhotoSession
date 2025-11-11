@@ -1,10 +1,8 @@
-package com.cvetyshayasiren.aiphotosession.ui
+package com.cvetyshayasiren.aiphotosession.ui.widgets
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Shapes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -14,9 +12,9 @@ import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
 
 @Composable
-fun ShapesView(
+fun ShapesWidget(
     modifier: Modifier = Modifier,
-    photos: List<ImageOpt> = listOf(ImageOpt.DUB_CYBER_0, ImageOpt.DUB_CYBER_1, ImageOpt.VI_CYBER_0, ImageOpt.VI_CYBER_1)
+    photos: List<ImageOpt>
 ) {
     val shapes = remember { List(photos.size) { getRandomCornerShape() } }
 

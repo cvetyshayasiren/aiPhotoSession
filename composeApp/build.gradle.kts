@@ -35,6 +35,7 @@ kotlin {
             implementation(libs.bundles.sketch)
             implementation(libs.materialkolor)
             implementation(compose.materialIconsExtended)
+            implementation(libs.bundles.haze)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

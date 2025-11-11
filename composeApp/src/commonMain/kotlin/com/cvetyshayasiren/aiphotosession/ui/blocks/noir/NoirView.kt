@@ -1,0 +1,209 @@
+package com.cvetyshayasiren.aiphotosession.ui.blocks.noir
+
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
+import androidx.compose.ui.unit.dp
+import com.cvetyshayasiren.aiphotosession.Config
+import com.cvetyshayasiren.aiphotosession.data.ImageOpt
+import com.cvetyshayasiren.aiphotosession.ui.theme.rubikMonoOne
+import com.cvetyshayasiren.aiphotosession.ui.utils.EmoeImage
+import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
+import com.cvetyshayasiren.aiphotosession.ui.utils.VerticalText
+import com.cvetyshayasiren.aiphotosession.ui.utils.WalkingImage
+import com.cvetyshayasiren.aiphotosession.ui.widgets.FourSquareView
+import com.cvetyshayasiren.aiphotosession.ui.widgets.NamesWidget
+import com.cvetyshayasiren.aiphotosession.ui.widgets.ShapesWidget
+import org.jetbrains.compose.resources.InternalResourceApi
+
+@OptIn(InternalResourceApi::class)
+@Composable
+fun NoirView(modifier: Modifier = Modifier) {
+    val animateFloat = remember { Animatable(-4f) }
+
+    LaunchedEffect(Unit) {
+        animateFloat.animateTo(
+            targetValue = 4f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(durationMillis = 500, easing = FastOutLinearInEasing),
+                repeatMode = RepeatMode.Reverse
+            )
+        )
+    }
+
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.Start
+    ) {
+        Config.smallSpacer()
+        Text(
+            modifier = Modifier.basicMarquee(),
+            text = " AI PHOTO SESSION",
+            fontFamily = rubikMonoOne,
+            fontSize = MaterialTheme.typography.displayMedium.fontSize,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Config.bigBigSpacer()
+        ImageView(
+            modifier = Modifier.fillMaxWidth(),
+            image = ImageOpt.PAIR_4
+        )
+        Config.smallSpacer()
+        Text(
+            modifier = Modifier
+                .padding(12.dp)
+                .graphicsLayer {
+                    rotationZ = animateFloat.value
+                },
+            text = "Два нейро дундучка, знакомься",
+            fontFamily = rubikMonoOne,
+            fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+            color = MaterialTheme.colorScheme.secondary
+        )
+
+        ImageView(
+            image = ImageOpt.DUB_NOIR_2,
+            isRightLine = true
+        ) {
+            VerticalText("ILYA")
+        }
+
+        ImageView(
+            image = ImageOpt.VI_NOIR_9,
+            isRightLine = false
+        ) {
+            VerticalText("VITALYA")
+        }
+        Config.smallSpacer()
+        NamesWidget()
+
+        ImageView(
+            image = ImageOpt.DUB_NOIR_5
+        ) {
+            Text(
+                text = "Какой важный сел тут, ты ток глянь",
+                fontFamily = rubikMonoOne,
+                fontSize = MaterialTheme.typography.bodySmall.fontSize,
+            )
+        }
+        Text(
+            modifier = Modifier.padding(12.dp).width(200.dp),
+            text = "Сидят, стоят и пырят, а там дальше ещё разлёгся, ваще капец, что позволяет себе? А? А?",
+            maxLines = 10,
+            fontFamily = rubikMonoOne,
+            fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+            color = MaterialTheme.colorScheme.tertiary
+        )
+
+        ImageView(
+            image = ImageOpt.VI_NOIR_1
+        ) {
+            Text(
+                text = "Куда ты лёг емое?",
+                fontFamily = rubikMonoOne,
+                fontSize = MaterialTheme.typography.bodySmall.fontSize,
+            )
+        }
+
+        ImageView(
+            image = ImageOpt.DUB_NOIR_4,
+            isRightLine = true
+        ) {
+            VerticalText(
+                text = "rasSELSYA",
+                color = MaterialTheme.colorScheme.tertiary
+            )
+        }
+
+        Text(
+            modifier = Modifier.basicMarquee(),
+            text = "ILYA VITALYA ILYA VITALYA ILYA VITALYA ILYA VITALYA ILYA VITALYA ILYA VITALYA",
+            fontFamily = rubikMonoOne,
+            fontSize = MaterialTheme.typography.displayLarge.fontSize,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+        EmoeImage(
+            image = ImageOpt.VI_NOIR_0
+        )
+
+        ImageView(
+            image = ImageOpt.PAIR_0
+        ) {
+            Text(
+                text = "Гдет такую он шляпу раздобыл и притопал, шикарно немног",
+                fontFamily = rubikMonoOne,
+                fontSize = MaterialTheme.typography.bodySmall.fontSize,
+            )
+        }
+
+        FourSquareView(photo = ImageOpt.DUB_NOIR_3)
+
+        ImageView(
+            image = ImageOpt.DUB_NOIR_7
+        ) {
+            Text(
+                modifier = Modifier.padding(12.dp),
+                text = "Смри ещё, этот паря уселся на мосту будто король тут он главный самый",
+                fontFamily = rubikMonoOne,
+                fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+
+        Text(
+            modifier = Modifier.padding(12.dp),
+            text = "А дальше вообще ор, идёт как машина, прям на нас идёт, поход пора сваливать",
+            fontFamily = rubikMonoOne,
+            fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+            color = MaterialTheme.colorScheme.tertiaryFixedDim
+        )
+
+        WalkingImage(image = ImageOpt.VI_NOIR_0)
+
+        Text(
+            modifier = Modifier.padding(12.dp),
+            text = "Чую я ты хочешь ещё попырить на нейрочувачков, ну чтож мне не жалк совсем",
+            fontFamily = rubikMonoOne,
+            fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+            color = MaterialTheme.colorScheme.primary
+        )
+        ImageView(
+            modifier = Modifier
+                .graphicsLayer {
+                    translationX = animateFloat.value * 2
+                },
+            image = ImageOpt.VI_NOIR_2
+        )
+        ImageView(image = ImageOpt.DUB_NOIR_1)
+        ImageView(
+            image = ImageOpt.VI_NOIR_7,
+            isRightLine = true
+        ) {
+            VerticalText(
+                text = "пырит",
+                fontSize = MaterialTheme.typography.labelSmall.fontSize,
+            )
+        }
+        ImageView(
+            image = ImageOpt.DUB_NOIR_6,
+            isRightLine = false
+        ) {
+            VerticalText(
+                text = "сюда",
+                fontSize = MaterialTheme.typography.labelMedium.fontSize,
+            )
+        }
+        ImageView(image = ImageOpt.VI_NOIR_5)
+    }
+}

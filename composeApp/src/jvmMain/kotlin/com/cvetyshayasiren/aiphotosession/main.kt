@@ -1,6 +1,9 @@
 package com.cvetyshayasiren.aiphotosession
 
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
@@ -12,9 +15,11 @@ fun main() = application {
         state = WindowState(
             position = WindowPosition(
                 Alignment.Center
-            )
+            ),
+            size = DpSize(360.dp, 800.dp)
         ),
         title = "aiphotosession",
+        alwaysOnTop = true
     ) {
         App()
     }

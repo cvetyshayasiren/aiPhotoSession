@@ -1,4 +1,4 @@
-package com.cvetyshayasiren.aiphotosession.ui
+package com.cvetyshayasiren.aiphotosession.ui.widgets
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import com.cvetyshayasiren.aiphotosession.ui.theme.ThemeState
 
 @Composable
-fun ThemeSwitcherView(
+fun ThemeSwitcherWidget(
     modifier: Modifier = Modifier
 ) {
     val state = ThemeState.state.collectAsState()

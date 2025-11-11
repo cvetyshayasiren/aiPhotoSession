@@ -4,8 +4,10 @@ enum class ImageRatio(val value: Float) {
     SQUARE(1f), PORTRAIT(0.5625f), LANDSCAPE(1.7777f)
 }
 
-enum class ImageOpt(private val shortPath: String, private val ratio: ImageRatio) {
-
+enum class ImageOpt(
+    private val shortPath: String,
+    private val ratio: ImageRatio,
+) {
     DUB_CYBER_0(shortPath = "resultDub/modDub_cyber0.png", ratio = ImageRatio.SQUARE),
     DUB_CYBER_1(shortPath = "resultDub/modDub_cyber1.png", ratio = ImageRatio.SQUARE),
     DUB_CYBER_2(shortPath = "resultDub/modDub_cyber2.png", ratio = ImageRatio.SQUARE),
@@ -27,6 +29,8 @@ enum class ImageOpt(private val shortPath: String, private val ratio: ImageRatio
     DUB_NOIR_9(shortPath = "resultDub/modDub_noir9.png", ratio = ImageRatio.PORTRAIT),
     DUB_NOIR_10(shortPath = "resultDub/modDub_noir10.png", ratio = ImageRatio.PORTRAIT),
     DUB_NOIR_11(shortPath = "resultDub/modDub_noir11.png", ratio = ImageRatio.LANDSCAPE),
+    DUB_NOIR_12(shortPath = "resultDub/modDub_noir12.png", ratio = ImageRatio.LANDSCAPE),
+    DUB_NOIR_13(shortPath = "resultDub/modDub_noir13.png", ratio = ImageRatio.LANDSCAPE),
 
 
     VI_CYBER_0(shortPath = "resultVi/modVi_cyber0.png", ratio = ImageRatio.SQUARE),
@@ -44,7 +48,19 @@ enum class ImageOpt(private val shortPath: String, private val ratio: ImageRatio
     VI_NOIR_7(shortPath = "resultVi/modVi_noir7.png", ratio = ImageRatio.LANDSCAPE),
     VI_NOIR_8(shortPath = "resultVi/modVi_noir8.png", ratio = ImageRatio.PORTRAIT),
     VI_NOIR_9(shortPath = "resultVi/modVi_noir9.png", ratio = ImageRatio.PORTRAIT),
-    VI_NOIR_10(shortPath = "resultVi/modVi_noir10.png", ratio = ImageRatio.LANDSCAPE);
+
+    PAIR_0(shortPath = "resultPair/pair0.png", ratio = ImageRatio.LANDSCAPE),
+    PAIR_1(shortPath = "resultPair/pair1.png", ratio = ImageRatio.LANDSCAPE),
+    PAIR_2(shortPath = "resultPair/pair2.png", ratio = ImageRatio.LANDSCAPE),
+    PAIR_3(shortPath = "resultPair/pair3.png", ratio = ImageRatio.LANDSCAPE),
+    PAIR_4(shortPath = "resultPair/pair4.png", ratio = ImageRatio.LANDSCAPE),
+    PAIR_5(shortPath = "resultPair/pair5.png", ratio = ImageRatio.LANDSCAPE),
+    PAIR_6(shortPath = "resultPair/pair6.png", ratio = ImageRatio.LANDSCAPE),
+    PAIR_7(shortPath = "resultPair/pair7.png", ratio = ImageRatio.LANDSCAPE),
+    PAIR_8(shortPath = "resultPair/pair8.png", ratio = ImageRatio.LANDSCAPE),
+    PAIR_9(shortPath = "resultPair/pair9.png", ratio = ImageRatio.LANDSCAPE),
+
+    ;
 
     fun getUri(): String {
         return "$ROOT_LINK/$shortPath"
@@ -56,10 +72,10 @@ enum class ImageOpt(private val shortPath: String, private val ratio: ImageRatio
         const val ROOT_LINK = "https://raw.githubusercontent.com/cvetyshayasiren/aiPhotoSession/refs/heads/content"
 
         val trashList = listOf<ImageOpt>(
-            DUB_NOIR_0, DUB_NOIR_3,DUB_NOIR_4,DUB_NOIR_8,DUB_NOIR_10, DUB_NOIR_11,
-            DUB_CYBER_1, DUB_CYBER_2, DUB_CYBER_3, DUB_CYBER_6, DUB_CYBER_7,
-            VI_NOIR_3, VI_NOIR_4, VI_NOIR_5, VI_NOIR_8, VI_NOIR_10,
-            VI_CYBER_0, VI_CYBER_2, VI_CYBER_3
+//            DUB_NOIR_0, DUB_NOIR_3,DUB_NOIR_4,DUB_NOIR_8,DUB_NOIR_10, DUB_NOIR_11,
+//            DUB_CYBER_1, DUB_CYBER_2, DUB_CYBER_3, DUB_CYBER_6, DUB_CYBER_7,
+//            VI_NOIR_3, VI_NOIR_4, VI_NOIR_5, VI_NOIR_8,
+//            VI_CYBER_0, VI_CYBER_2, VI_CYBER_3
         )
 
         fun getShuffledTrashList() = trashList.shuffled()
