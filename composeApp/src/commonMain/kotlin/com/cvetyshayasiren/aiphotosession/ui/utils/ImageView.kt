@@ -4,6 +4,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -83,7 +84,6 @@ fun ImageViewCaptioned(
         modifier = Modifier
             .wrapContentSize()
             .animated()
-            .shadow(Config.shadowElevation)
             ,
         contentAlignment = Alignment.BottomStart
     ) {
@@ -98,8 +98,11 @@ fun ImageViewCaptioned(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .hazeEffect(state = hazeState, style = HazeMaterials.ultraThin())
-                .padding(Config.defaultSpacerDp),
+                .hazeEffect(
+                    state = hazeState,
+                    style = HazeMaterials.thin()
+                )
+                .padding(Config.smallSpacerDp),
             contentAlignment = Alignment.CenterStart
         ) {
             content()
@@ -135,9 +138,10 @@ fun ImageViewLabeled(
         Box(
             modifier = Modifier
                 .padding(Config.smallPadding)
-                .clip(Config.defaultRoundedShape)
+                .clip(Config.smallRoundedShape)
                 .hazeEffect(state = hazeState, style = HazeMaterials.ultraThin())
-                .padding(Config.smallPadding)
+                .padding(Config.smallPadding),
+            contentAlignment = Alignment.Center
         ) {
             content()
         }
@@ -167,7 +171,7 @@ fun ImageViewWithLine(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight()
-                    .padding(Config.defaultSpacerDp),
+                    .padding(Config.smallSpacerDp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.Bottom
             ) {
@@ -187,7 +191,7 @@ fun ImageViewWithLine(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight()
-                    .padding(Config.defaultSpacerDp),
+                    .padding(Config.smallSpacerDp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.Bottom
             ) {
@@ -254,7 +258,7 @@ fun EmoeImage(
     val emoeList = remember { listOf("емое", "емоё", "ёмое", "ёмоё") }
     val colors = listOf(
         MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.secondary,
-        MaterialTheme.colorScheme.tertiary,MaterialTheme.colorScheme.error
+        MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.secondaryFixed
     )
 
     Box(

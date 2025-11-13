@@ -4,6 +4,7 @@ import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,10 +13,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.cvetyshayasiren.aiphotosession.Config
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.theme.rubikMonoOne
@@ -49,7 +50,7 @@ fun NoirView(modifier: Modifier = Modifier) {
         modifier = modifier,
         horizontalAlignment = Alignment.Start
     ) {
-        Config.smallSpacer()
+        Config.bigSpacer()
         Text(
             modifier = Modifier.basicMarquee(),
             text = " AI PHOTO SESSION",
@@ -57,7 +58,7 @@ fun NoirView(modifier: Modifier = Modifier) {
             fontSize = MaterialTheme.typography.displayMedium.fontSize,
             color = MaterialTheme.colorScheme.primary
         )
-        Config.bigBigSpacer()
+        Config.bigSpacer()
         ImageView(
             image = ImageOpt.PAIR_4
         )
@@ -82,6 +83,14 @@ fun NoirView(modifier: Modifier = Modifier) {
         }
 
         ImageViewWithLine(
+            modifier = Modifier
+                .clip(
+                    shape = RoundedCornerShape(bottomStart = Config.bigRound)
+                )
+                .shadow(
+                    elevation = Config.shadowElevation,
+                    shape = RoundedCornerShape(bottomStart = Config.bigRound)
+                ),
             image = ImageOpt.VI_NOIR_9,
             isRightLine = false
         ) {
@@ -89,6 +98,7 @@ fun NoirView(modifier: Modifier = Modifier) {
         }
         Config.smallSpacer()
         NamesWidget()
+        Config.bigSpacer()
 
         ImageViewCaptioned(image = ImageOpt.DUB_NOIR_5) {
             Text(
@@ -98,10 +108,10 @@ fun NoirView(modifier: Modifier = Modifier) {
             )
         }
 
-        Config.smallSpacer()
+        Config.bigSpacer()
         Text(
             modifier = Modifier.padding(12.dp).fillMaxWidth(.8f),
-            text = "Сидят они, стоят они и пырят, а там дальше ещё разлёгся, ваще капец, что позволяет себе? А? А?",
+            text = "Сидят они, стоят они и пырят, а там дальше ещё разлёгся, вобщ канеш, что позволяет себе? А? А?",
             fontFamily = rubikMonoOne,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
             color = MaterialTheme.colorScheme.tertiary
@@ -123,11 +133,20 @@ fun NoirView(modifier: Modifier = Modifier) {
             isRightLine = true
         ) {
             VerticalText(
+                modifier = Modifier
+                    .clip(
+                        shape = RoundedCornerShape(bottomEnd = Config.bigRound)
+                    )
+                    .shadow(
+                        elevation = Config.shadowElevation,
+                        shape = RoundedCornerShape(bottomEnd = Config.bigRound)
+                    ),
                 text = "rasSELSYA",
                 color = MaterialTheme.colorScheme.tertiary
             )
         }
 
+        Config.bigSpacer()
         Text(
             modifier = Modifier.basicMarquee(),
             text = "ILYA VITALYA ILYA VITALYA ILYA VITALYA ILYA VITALYA ILYA VITALYA ILYA VITALYA",
@@ -135,6 +154,7 @@ fun NoirView(modifier: Modifier = Modifier) {
             fontSize = MaterialTheme.typography.displayLarge.fontSize,
             color = MaterialTheme.colorScheme.primary
         )
+        Config.bigSpacer()
 
         ImageViewLabeled(image = ImageOpt.PAIR_0) {
             Text(
@@ -158,8 +178,9 @@ fun NoirView(modifier: Modifier = Modifier) {
             )
         }
 
+        Config.bigSpacer()
         Text(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(12.dp).fillMaxWidth(.6f).align(Alignment.End),
             text = "А дальше вообще ор, идёт как машина, прям на нас идёт, поход пора сваливать",
             fontFamily = rubikMonoOne,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
@@ -168,6 +189,7 @@ fun NoirView(modifier: Modifier = Modifier) {
 
         WalkingImage(image = ImageOpt.VI_NOIR_0)
 
+        Config.bigSpacer()
         Text(
             modifier = Modifier.padding(12.dp),
             text = "Чую я ты хочешь ещё попырить на нейрочувачков, ну чтож мне не жалк совсем",
@@ -201,11 +223,12 @@ fun NoirView(modifier: Modifier = Modifier) {
                 fontSize = MaterialTheme.typography.labelSmall.fontSize,
             )
         }
+        EmoeImage(image = ImageOpt.DUB_NOIR_0)
         ImageView(image = ImageOpt.VI_NOIR_5)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(Config.defaultSpacerDp * 6)
+                .height(Config.smallSpacerDp * 6)
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(

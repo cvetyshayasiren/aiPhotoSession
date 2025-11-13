@@ -7,17 +7,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.cvetyshayasiren.aiphotosession.Config.defaultSpacerDp
 
 object Config {
     val minContentWidth = 200.dp
     val maxContentWidth = 840.dp
-    val defaultRoundedShape = RoundedCornerShape(18.dp)
+
+    val smallRound = 8.dp
+    val bigRound = 24.dp
+
+    val smallRoundedShape = RoundedCornerShape(smallRound)
+    val bigRoundedShape = RoundedCornerShape(bigRound)
 
     val smallPadding = 4.dp
     val shadowElevation = 2.dp
 
-    val defaultSpacerDp = 24.dp
+    val smallSpacerDp = 24.dp
 
     const val FRACTION_VISIBLE_THRESHOLD = 0.2f
 
@@ -30,11 +34,11 @@ object Config {
     )
 
     @Composable
-    fun someSpacer(dp: Dp = defaultSpacerDp) = Spacer(modifier = Modifier.height(dp))
+    fun someSpacer(dp: Dp = smallSpacerDp) = Spacer(modifier = Modifier.height(dp))
 
     @Composable
-    fun smallSpacer() = someSpacer(dp = defaultSpacerDp)
+    fun smallSpacer() = someSpacer(dp = smallSpacerDp)
 
     @Composable
-    fun bigBigSpacer() = someSpacer(dp = defaultSpacerDp * 2)
+    fun bigSpacer() = someSpacer(dp = smallSpacerDp * 2)
 }

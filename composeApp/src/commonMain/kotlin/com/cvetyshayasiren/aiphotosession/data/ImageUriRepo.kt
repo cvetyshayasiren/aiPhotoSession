@@ -73,7 +73,7 @@ enum class ImageOpt(
 
         val trashList = listOf<ImageOpt>(
             DUB_CYBER_2, DUB_CYBER_6, DUB_CYBER_7,
-            DUB_NOIR_0, DUB_NOIR_8, DUB_NOIR_9, DUB_NOIR_10, DUB_NOIR_11, DUB_NOIR_12, DUB_NOIR_13,
+            DUB_NOIR_8, DUB_NOIR_9, DUB_NOIR_10, DUB_NOIR_11, DUB_NOIR_12, DUB_NOIR_13,
             VI_CYBER_0,
             VI_NOIR_3, VI_NOIR_4, VI_NOIR_6, VI_NOIR_8,
             PAIR_1, PAIR_2, PAIR_3, PAIR_5, PAIR_6, PAIR_7, PAIR_8, PAIR_9,

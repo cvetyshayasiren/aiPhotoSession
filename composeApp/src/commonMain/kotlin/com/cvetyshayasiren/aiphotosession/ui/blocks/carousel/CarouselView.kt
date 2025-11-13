@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import com.cvetyshayasiren.aiphotosession.Config
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.theme.rubikMonoOne
-import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
 import com.github.panpf.sketch.AsyncImage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -36,7 +35,7 @@ fun CarouselView(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(
-            space = Config.defaultSpacerDp
+            space = Config.smallSpacerDp
         )
     ) {
         Config.smallSpacer()
@@ -67,7 +66,7 @@ fun CarouselView(
             AsyncImage(
                 modifier = Modifier
                     .fillMaxSize()
-                    .maskClip(Config.defaultRoundedShape),
+                    .maskClip(Config.smallRoundedShape),
                 uri = trashList[listIndex].getUri(),
                 contentScale = ContentScale.Crop,
                 contentDescription = ""

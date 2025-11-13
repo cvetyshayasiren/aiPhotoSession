@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.blocks.carousel.CarouselView
 import com.cvetyshayasiren.aiphotosession.ui.blocks.cyber.CyberView
+import com.cvetyshayasiren.aiphotosession.ui.blocks.footer.FooterView
 import com.cvetyshayasiren.aiphotosession.ui.blocks.noir.NoirView
 import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
 
@@ -26,6 +27,7 @@ fun PhotoSessionScreen(
         NoirView(modifier = Modifier.background(MaterialTheme.colorScheme.surfaceVariant))
         CyberView()
         CarouselView(modifier = Modifier.background(MaterialTheme.colorScheme.surfaceVariant))
+        FooterView()
     }
 }
 

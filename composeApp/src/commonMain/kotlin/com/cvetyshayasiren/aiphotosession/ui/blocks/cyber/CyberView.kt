@@ -1,9 +1,7 @@
 package com.cvetyshayasiren.aiphotosession.ui.blocks.cyber
 
-import androidx.compose.foundation.MarqueeAnimationMode
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,8 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -47,6 +45,11 @@ fun CyberView(modifier: Modifier = Modifier) {
                 color = MaterialTheme.colorScheme.tertiary
             )
             Text(
+                modifier = Modifier
+                    .graphicsLayer {
+                        scaleX = 1.5f
+                        transformOrigin = TransformOrigin(pivotFractionX = 0f, pivotFractionY = .5f)
+                    },
                 text = "BER",
                 fontFamily = rubikMonoOne,
                 fontSize = MaterialTheme.typography.displayMedium.fontSize,
@@ -54,6 +57,7 @@ fun CyberView(modifier: Modifier = Modifier) {
             )
         }
 
+        Config.bigSpacer()
         Text(
             modifier = Modifier.padding(12.dp),
             text = "Тут я хз как, но они вдруг стали кибернетическе собаке будт",
@@ -75,6 +79,7 @@ fun CyberView(modifier: Modifier = Modifier) {
             )
         }
 
+        Config.smallSpacer()
         Text(
             modifier = Modifier.basicMarquee(),
             text = "CYBER ILYA CYBER VITALYA CYBER ILYA CYBER VITALYA CYBER ILYA CYBER VITALYA CYBER ILYA CYBER VITALYA",
@@ -93,6 +98,7 @@ fun CyberView(modifier: Modifier = Modifier) {
             fontSize = MaterialTheme.typography.displaySmall.fontSize,
             color = MaterialTheme.colorScheme.primary
         )
+        Config.smallSpacer()
 
         ImageViewLabeled(
             image = ImageOpt.DUB_CYBER_0
@@ -105,6 +111,7 @@ fun CyberView(modifier: Modifier = Modifier) {
             )
         }
 
+        Config.bigSpacer()
         ShapesWidget(
             photos = listOf(
                 ImageOpt.VI_CYBER_3, ImageOpt.DUB_CYBER_1,
@@ -112,6 +119,7 @@ fun CyberView(modifier: Modifier = Modifier) {
 
             )
         )
+        Config.bigSpacer()
 
         ImageViewWithLine(
             image = ImageOpt.DUB_CYBER_4,
@@ -126,7 +134,7 @@ fun CyberView(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(Config.defaultSpacerDp * 6)
+                .height(Config.smallSpacerDp * 6)
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
