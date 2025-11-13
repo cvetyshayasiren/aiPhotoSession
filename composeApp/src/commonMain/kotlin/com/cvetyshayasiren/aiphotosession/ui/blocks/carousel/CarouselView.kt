@@ -13,10 +13,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.cvetyshayasiren.aiphotosession.Config
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.theme.rubikMonoOne
+import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
+import com.github.panpf.sketch.AsyncImage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -61,7 +64,14 @@ fun CarouselView(
             ,
             state = carouselState
         ) {listIndex ->
-            Text(text = listIndex.toString())
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .maskClip(Config.defaultRoundedShape),
+                uri = trashList[listIndex].getUri(),
+                contentScale = ContentScale.Crop,
+                contentDescription = ""
+            )
         }
         Config.smallSpacer()
     }

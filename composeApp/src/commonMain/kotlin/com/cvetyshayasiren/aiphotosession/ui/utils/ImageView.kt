@@ -5,19 +5,21 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onFirstVisible
-import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.util.lerp
 import com.cvetyshayasiren.aiphotosession.Config
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.main.MainViewModel
@@ -36,15 +38,15 @@ import kotlin.math.sin
 
 @Composable
 fun ImageView(
-    modifier: Modifier = Modifier,
     image: ImageOpt,
-    animated: Boolean = true,
-    aspectRatio: Float? = null,
-    contentScale: ContentScale = ContentScale.Fit,
+    modifier: Modifier = Modifier
+        .fillMaxWidth()
+        .animated()
+        .shadow(Config.shadowElevation),
+    useImageAspectRatio: Boolean = true,
+    contentScale: ContentScale = ContentScale.Crop,
     colorFilter: ColorFilter? = null
 ) {
-    val aspectRatio = remember { aspectRatio ?: image.getRatio() }
-
     val state = rememberAsyncImageState()
     val loadState: LoadState? = state.loadState
 
@@ -56,9 +58,8 @@ fun ImageView(
     AsyncImage(
         state = state,
         modifier = modifier
-            .aspectRatio(aspectRatio)
-            .then(if(animated) Modifier.animated() else Modifier)
-            .shadow(Config.shadowElevation),
+            .then(other = if(useImageAspectRatio) Modifier.aspectRatio(image.getRatio()) else Modifier)
+        ,
         uri = image.getUri(),
         contentDescription = "photo",
         contentScale = contentScale,
@@ -68,26 +69,28 @@ fun ImageView(
 
 @OptIn(ExperimentalHazeMaterialsApi::class)
 @Composable
-fun ImageView(
-    modifier: Modifier = Modifier,
+fun ImageViewCaptioned(
     image: ImageOpt,
-    animated: Boolean = true,
-    aspectRatio: Float? = null,
-    contentScale: ContentScale = ContentScale.Fit,
+    modifier: Modifier = Modifier
+        .fillMaxWidth(),
+    useImageAspectRatio: Boolean = true,
+    contentScale: ContentScale = ContentScale.Crop,
     colorFilter: ColorFilter? = null,
     content: @Composable (BoxScope.() -> Unit)
 ) {
     val hazeState = rememberHazeState()
     Box(
-        modifier = Modifier.wrapContentSize(),
+        modifier = Modifier
+            .wrapContentSize()
+            .animated()
+            .shadow(Config.shadowElevation)
+            ,
         contentAlignment = Alignment.BottomStart
     ) {
         ImageView(
-            modifier = modifier
-                .hazeSource(hazeState),
+            modifier = modifier.hazeSource(hazeState),
             image = image,
-            animated = animated,
-            aspectRatio = aspectRatio,
+            useImageAspectRatio = useImageAspectRatio,
             contentScale = contentScale,
             colorFilter = colorFilter
         )
@@ -104,18 +107,58 @@ fun ImageView(
     }
 }
 
+@OptIn(ExperimentalHazeMaterialsApi::class)
 @Composable
-fun ImageView(
-    modifier: Modifier = Modifier,
+fun ImageViewLabeled(
     image: ImageOpt,
-    animated: Boolean = true,
-    aspectRatio: Float? = null,
-    contentScale: ContentScale = ContentScale.Fit,
+    modifier: Modifier = Modifier.fillMaxWidth(),
+    useImageAspectRatio: Boolean = true,
+    contentScale: ContentScale = ContentScale.Crop,
     colorFilter: ColorFilter? = null,
-    isRightLine: Boolean,
+    content: @Composable (BoxScope.() -> Unit)
+) {
+    val hazeState = rememberHazeState()
+    Box(
+        modifier = Modifier
+            .wrapContentSize()
+            .animated()
+            .shadow(Config.shadowElevation),
+        contentAlignment = Alignment.BottomEnd
+    ) {
+        ImageView(
+            modifier = modifier.hazeSource(hazeState),
+            image = image,
+            useImageAspectRatio = useImageAspectRatio,
+            contentScale = contentScale,
+            colorFilter = colorFilter
+        )
+        Box(
+            modifier = Modifier
+                .padding(Config.smallPadding)
+                .clip(Config.defaultRoundedShape)
+                .hazeEffect(state = hazeState, style = HazeMaterials.ultraThin())
+                .padding(Config.smallPadding)
+        ) {
+            content()
+        }
+    }
+}
+
+@Composable
+fun ImageViewWithLine(
+    modifier: Modifier = Modifier
+        .shadow(Config.shadowElevation),
+    image: ImageOpt,
+    useImageAspectRatio: Boolean = true,
+    contentScale: ContentScale = ContentScale.Crop,
+    colorFilter: ColorFilter? = null,
+    isRightLine: Boolean = true,
     content: @Composable (RowScope.() -> Unit)
 ) {
     Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .animated(),
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.End
     ) {
@@ -135,8 +178,7 @@ fun ImageView(
             modifier = modifier
                 .fillMaxWidth(fraction = .8f),
             image = image,
-            animated = animated,
-            aspectRatio = aspectRatio,
+            useImageAspectRatio = useImageAspectRatio,
             contentScale = contentScale,
             colorFilter = colorFilter
         )
@@ -157,10 +199,11 @@ fun ImageView(
 
 @Composable
 fun WalkingImage(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
+        .fillMaxWidth(),
     image: ImageOpt,
-    aspectRatio: Float? = null,
-    contentScale: ContentScale = ContentScale.Fit,
+    useImageAspectRatio: Boolean = true,
+    contentScale: ContentScale = ContentScale.Crop,
     colorFilter: ColorFilter? = null
 ) {
     val animateFloat = remember { Animatable(0f) }
@@ -170,9 +213,9 @@ fun WalkingImage(
 
     ImageView(
         modifier = modifier
-            .onFirstVisible(minFractionVisible = Config.FRACTION_VISIBLE_THRESHOLD) {
+            .onFirstVisible(minFractionVisible = .6f) {
                 scope.launch {
-                    points.forEach {point ->
+                    points.forEach { point ->
                         animateFloat.animateTo(
                             targetValue = point,
                             animationSpec = tween(
@@ -184,15 +227,15 @@ fun WalkingImage(
                 }
             }
             .graphicsLayer {
-                scaleX = animateFloat.value
-                scaleY = animateFloat.value
                 animateFloat.value.let { anim ->
+                    scaleX = anim
+                    scaleY = anim
                     rotationZ = sin(3 * PI.toFloat() * anim) * angle
                 }
-            },
+            }
+            .shadow(Config.shadowElevation),
         image = image,
-        animated = false,
-        aspectRatio = aspectRatio,
+        useImageAspectRatio = useImageAspectRatio,
         contentScale = contentScale,
         colorFilter = colorFilter
     )
@@ -200,50 +243,68 @@ fun WalkingImage(
 
 @Composable
 fun EmoeImage(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
+        .fillMaxWidth()
+        .shadow(Config.shadowElevation),
     image: ImageOpt,
-    aspectRatio: Float? = null,
-    contentScale: ContentScale = ContentScale.Fit,
+    useImageAspectRatio: Boolean = true,
+    contentScale: ContentScale = ContentScale.Crop,
     colorFilter: ColorFilter? = null
 ) {
-    val scope = rememberCoroutineScope()
-    val animateFloat = remember { Animatable(-50f) }
     val emoeList = remember { listOf("емое", "емоё", "ёмое", "ёмоё") }
+    val colors = listOf(
+        MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.secondary,
+        MaterialTheme.colorScheme.tertiary,MaterialTheme.colorScheme.error
+    )
 
     Box(
-        modifier = Modifier
-            .wrapContentHeight(),
-        contentAlignment = Alignment.Center
+        modifier = Modifier.wrapContentSize(),
+        contentAlignment = Alignment.BottomStart
     ) {
         ImageView(
-            modifier = modifier
-                .onFirstVisible(minFractionVisible = Config.FRACTION_VISIBLE_THRESHOLD) {
-                    scope.launch {
-                        animateFloat.animateTo(
-                            targetValue = 300f,
-                            animationSpec = infiniteRepeatable(
-                                animation = tween(5000),
-                                repeatMode = RepeatMode.Reverse
-                            )
-                        )
-                    }
-                },
+            modifier = modifier,
             image = image,
-            animated = false,
-            aspectRatio = aspectRatio,
+            useImageAspectRatio = useImageAspectRatio,
             contentScale = contentScale,
             colorFilter = colorFilter
         )
 
-        Column {
-            emoeList.forEach { emoe ->
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(bottom = Config.smallPadding)
+        ) {
+            emoeList.forEachIndexed { index, emoe ->
+                val animateFloat = remember { Animatable(0f) }
+
+                LaunchedEffect(Unit) {
+                    animateFloat.animateTo(
+                        targetValue = 1f,
+                        animationSpec = infiniteRepeatable(
+                            animation = tween(
+                                delayMillis = index * 250,
+                                durationMillis = 5000
+                            ),
+                            repeatMode = RepeatMode.Reverse
+                        )
+                    )
+                }
+
                 Text(
                     modifier = Modifier
                         .graphicsLayer {
-                            translationX = animateFloat.value
+                            size.width.let { width ->
+                                translationX = lerp(
+                                    start = -width * 1.2f,
+                                    stop = width * 2,
+                                    fraction = (animateFloat.value)
+                                )
+                            }
                         },
                     text = emoe,
-                    fontFamily = rubikMonoOne
+                    fontFamily = rubikMonoOne,
+                    color = colors[index]
                 )
             }
         }

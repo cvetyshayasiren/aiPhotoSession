@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
@@ -42,37 +43,41 @@ fun SplashScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            modifier = Modifier
-                .graphicsLayer {
-                    scaleX = 2f
-                },
-            text = "AI",
-            fontSize = MaterialTheme.typography.displayLarge.fontSize,
-            fontFamily = rubikMonoOne,
-            color = MaterialTheme.colorScheme.primary
-        )
-        Text(
-            modifier = Modifier.basicMarquee().padding(12.dp),
-            text = " PHOTO",
-            fontSize = MaterialTheme.typography.displayMedium.fontSize,
-            fontFamily = rubikMonoOne,
-            color = MaterialTheme.colorScheme.secondary
-        )
-        Text(
-            modifier = Modifier.basicMarquee().padding(12.dp),
-            text = "  SESSION",
-            fontSize = MaterialTheme.typography.displayMedium.fontSize,
-            fontFamily = rubikMonoOne,
-            color = MaterialTheme.colorScheme.error
-        )
-
-
         Column(
-            modifier = Modifier.fillMaxWidth(.5f),
+            modifier = Modifier
+                .widthIn(
+                    min = Config.minContentWidth,
+                    max = Config.maxContentWidth
+                )
+                .fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start
         ) {
+            Text(
+                modifier = Modifier
+                    .graphicsLayer {
+                        scaleX = 2f
+                        translationX = size.width / 2
+                    },
+                text = "AI",
+                fontSize = MaterialTheme.typography.displayLarge.fontSize,
+                fontFamily = rubikMonoOne,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                modifier = Modifier.basicMarquee().padding(12.dp),
+                text = " PHOTO",
+                fontSize = MaterialTheme.typography.displayMedium.fontSize,
+                fontFamily = rubikMonoOne,
+                color = MaterialTheme.colorScheme.secondary
+            )
+            Text(
+                modifier = Modifier.basicMarquee().padding(12.dp),
+                text = "  SESSION",
+                fontSize = MaterialTheme.typography.displaySmall.fontSize,
+                fontFamily = rubikMonoOne,
+                color = MaterialTheme.colorScheme.error
+            )
             Text(
                 modifier = Modifier.padding(Config.defaultSpacerDp),
                 text = "progress ${progress.value.prettyPercent()} ${phrases.value}",
@@ -93,6 +98,7 @@ fun SplashScreen(
             )
             Config.smallSpacer()
         }
+
         Text(
             modifier = Modifier.align(Alignment.End).padding(Config.defaultSpacerDp),
             text = "емое",

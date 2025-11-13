@@ -10,7 +10,11 @@ import androidx.compose.ui.unit.dp
 import com.cvetyshayasiren.aiphotosession.Config.defaultSpacerDp
 
 object Config {
+    val minContentWidth = 200.dp
+    val maxContentWidth = 840.dp
     val defaultRoundedShape = RoundedCornerShape(18.dp)
+
+    val smallPadding = 4.dp
     val shadowElevation = 2.dp
 
     val defaultSpacerDp = 24.dp
@@ -18,7 +22,7 @@ object Config {
     const val FRACTION_VISIBLE_THRESHOLD = 0.2f
 
     val loadingPhrases = listOf(
-        "двигаю мосты", "подгружаю вайбец", "ща ща погоди", "накладываю нуар", "стираю границы воображения"
+        "двигаю мосты", "подгружаю вайбец", "ща ща погоди", "накладываю нуар", "стираю границы воображения", "потерпи емое"
     )
 
     val almostLoadingPhrases = listOf(

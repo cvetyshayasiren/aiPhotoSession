@@ -33,7 +33,6 @@ fun FourSquareView(
                     color = MaterialTheme.colorScheme.primary,
                     blendMode = BlendMode.Hue
                 ),
-                aspectRatio = 1f
             )
             ImageView(
                 modifier = Modifier.weight(1f),
@@ -42,7 +41,6 @@ fun FourSquareView(
                     color = MaterialTheme.colorScheme.secondary,
                     blendMode = BlendMode.Hue
                 ),
-                aspectRatio = 1f
             )
         }
         Row(
@@ -55,7 +53,6 @@ fun FourSquareView(
                     color = MaterialTheme.colorScheme.tertiary,
                     blendMode = BlendMode.Hue
                 ),
-                aspectRatio = 1f
             )
             ImageView(
                 modifier = Modifier.weight(1f),
@@ -64,7 +61,6 @@ fun FourSquareView(
                     color = MaterialTheme.colorScheme.error,
                     blendMode = BlendMode.Hue
                 ),
-                aspectRatio = 1f
             )
         }
     }

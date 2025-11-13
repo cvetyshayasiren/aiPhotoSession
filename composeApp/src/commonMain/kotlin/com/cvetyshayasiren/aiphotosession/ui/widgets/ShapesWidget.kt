@@ -26,8 +26,7 @@ fun ShapesWidget(
                 modifier = Modifier
                     .weight(1f)
                     .clip(shapes[index]),
-                image = image,
-                aspectRatio = 1f
+                image = image
             )
         }
     }

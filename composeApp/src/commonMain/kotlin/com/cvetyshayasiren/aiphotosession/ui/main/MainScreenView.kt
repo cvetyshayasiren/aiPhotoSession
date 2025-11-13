@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
+import com.cvetyshayasiren.aiphotosession.Config
 import com.cvetyshayasiren.aiphotosession.ui.widgets.ThemeSwitcherWidget
 
 @Composable
@@ -37,7 +38,14 @@ fun MainScreenView(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
-        PhotoSessionScreen(modifier = Modifier.verticalScroll(scrollState).widthIn(min = 200.dp, max = 840.dp))
+        PhotoSessionScreen(
+            modifier = Modifier
+                .verticalScroll(scrollState)
+                .widthIn(
+                    min = Config.minContentWidth,
+                    max = Config.maxContentWidth
+                )
+        )
         ThemeSwitcherWidget(
             modifier = Modifier.align(Alignment.TopEnd)
         )

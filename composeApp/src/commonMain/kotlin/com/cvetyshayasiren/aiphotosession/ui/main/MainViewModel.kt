@@ -11,7 +11,7 @@ import kotlin.jvm.JvmInline
 import kotlin.math.max
 
 object MainViewModel: ViewModel() {
-    internal val loadingQueue: MutableStateFlow<Set<ImageOpt>> = MutableStateFlow(setOf())
+    internal val loadingQueue: MutableStateFlow<Set<ImageOpt>> = MutableStateFlow(ImageOpt.loadSet)
     internal var maxQueueSize = loadingQueue.value.size
         private set
 

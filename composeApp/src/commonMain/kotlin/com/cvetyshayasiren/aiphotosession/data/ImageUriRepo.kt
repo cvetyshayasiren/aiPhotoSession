@@ -72,11 +72,14 @@ enum class ImageOpt(
         const val ROOT_LINK = "https://raw.githubusercontent.com/cvetyshayasiren/aiPhotoSession/refs/heads/content"
 
         val trashList = listOf<ImageOpt>(
-//            DUB_NOIR_0, DUB_NOIR_3,DUB_NOIR_4,DUB_NOIR_8,DUB_NOIR_10, DUB_NOIR_11,
-//            DUB_CYBER_1, DUB_CYBER_2, DUB_CYBER_3, DUB_CYBER_6, DUB_CYBER_7,
-//            VI_NOIR_3, VI_NOIR_4, VI_NOIR_5, VI_NOIR_8,
-//            VI_CYBER_0, VI_CYBER_2, VI_CYBER_3
+            DUB_CYBER_2, DUB_CYBER_6, DUB_CYBER_7,
+            DUB_NOIR_0, DUB_NOIR_8, DUB_NOIR_9, DUB_NOIR_10, DUB_NOIR_11, DUB_NOIR_12, DUB_NOIR_13,
+            VI_CYBER_0,
+            VI_NOIR_3, VI_NOIR_4, VI_NOIR_6, VI_NOIR_8,
+            PAIR_1, PAIR_2, PAIR_3, PAIR_5, PAIR_6, PAIR_7, PAIR_8, PAIR_9,
         )
+
+        val loadSet = entries.toSet() - trashList.toSet()
 
         fun getShuffledTrashList() = trashList.shuffled()
     }

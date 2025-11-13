@@ -1,7 +1,7 @@
 package com.cvetyshayasiren.aiphotosession.ui.blocks.noir
 
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -11,19 +11,23 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.cvetyshayasiren.aiphotosession.Config
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.theme.rubikMonoOne
 import com.cvetyshayasiren.aiphotosession.ui.utils.EmoeImage
 import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
+import com.cvetyshayasiren.aiphotosession.ui.utils.ImageViewCaptioned
+import com.cvetyshayasiren.aiphotosession.ui.utils.ImageViewLabeled
+import com.cvetyshayasiren.aiphotosession.ui.utils.ImageViewWithLine
 import com.cvetyshayasiren.aiphotosession.ui.utils.VerticalText
 import com.cvetyshayasiren.aiphotosession.ui.utils.WalkingImage
 import com.cvetyshayasiren.aiphotosession.ui.widgets.FourSquareView
 import com.cvetyshayasiren.aiphotosession.ui.widgets.NamesWidget
-import com.cvetyshayasiren.aiphotosession.ui.widgets.ShapesWidget
 import org.jetbrains.compose.resources.InternalResourceApi
 
 @OptIn(InternalResourceApi::class)
@@ -55,7 +59,6 @@ fun NoirView(modifier: Modifier = Modifier) {
         )
         Config.bigBigSpacer()
         ImageView(
-            modifier = Modifier.fillMaxWidth(),
             image = ImageOpt.PAIR_4
         )
         Config.smallSpacer()
@@ -71,14 +74,14 @@ fun NoirView(modifier: Modifier = Modifier) {
             color = MaterialTheme.colorScheme.secondary
         )
 
-        ImageView(
+        ImageViewWithLine(
             image = ImageOpt.DUB_NOIR_2,
             isRightLine = true
         ) {
             VerticalText("ILYA")
         }
 
-        ImageView(
+        ImageViewWithLine(
             image = ImageOpt.VI_NOIR_9,
             isRightLine = false
         ) {
@@ -87,35 +90,35 @@ fun NoirView(modifier: Modifier = Modifier) {
         Config.smallSpacer()
         NamesWidget()
 
-        ImageView(
-            image = ImageOpt.DUB_NOIR_5
-        ) {
+        ImageViewCaptioned(image = ImageOpt.DUB_NOIR_5) {
             Text(
                 text = "Какой важный сел тут, ты ток глянь",
                 fontFamily = rubikMonoOne,
                 fontSize = MaterialTheme.typography.bodySmall.fontSize,
             )
         }
+
+        Config.smallSpacer()
         Text(
-            modifier = Modifier.padding(12.dp).width(200.dp),
-            text = "Сидят, стоят и пырят, а там дальше ещё разлёгся, ваще капец, что позволяет себе? А? А?",
-            maxLines = 10,
+            modifier = Modifier.padding(12.dp).fillMaxWidth(.8f),
+            text = "Сидят они, стоят они и пырят, а там дальше ещё разлёгся, ваще капец, что позволяет себе? А? А?",
             fontFamily = rubikMonoOne,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
             color = MaterialTheme.colorScheme.tertiary
         )
 
-        ImageView(
+        ImageViewLabeled(
             image = ImageOpt.VI_NOIR_1
         ) {
             Text(
                 text = "Куда ты лёг емое?",
                 fontFamily = rubikMonoOne,
-                fontSize = MaterialTheme.typography.bodySmall.fontSize,
+                fontSize = MaterialTheme.typography.labelSmall.fontSize,
             )
         }
 
-        ImageView(
+
+        ImageViewWithLine(
             image = ImageOpt.DUB_NOIR_4,
             isRightLine = true
         ) {
@@ -133,23 +136,17 @@ fun NoirView(modifier: Modifier = Modifier) {
             color = MaterialTheme.colorScheme.primary
         )
 
-        EmoeImage(
-            image = ImageOpt.VI_NOIR_0
-        )
-
-        ImageView(
-            image = ImageOpt.PAIR_0
-        ) {
+        ImageViewLabeled(image = ImageOpt.PAIR_0) {
             Text(
                 text = "Гдет такую он шляпу раздобыл и притопал, шикарно немног",
                 fontFamily = rubikMonoOne,
-                fontSize = MaterialTheme.typography.bodySmall.fontSize,
+                fontSize = MaterialTheme.typography.labelSmall.fontSize,
             )
         }
 
         FourSquareView(photo = ImageOpt.DUB_NOIR_3)
 
-        ImageView(
+        ImageViewCaptioned(
             image = ImageOpt.DUB_NOIR_7
         ) {
             Text(
@@ -186,24 +183,37 @@ fun NoirView(modifier: Modifier = Modifier) {
             image = ImageOpt.VI_NOIR_2
         )
         ImageView(image = ImageOpt.DUB_NOIR_1)
-        ImageView(
+        ImageViewWithLine(
             image = ImageOpt.VI_NOIR_7,
             isRightLine = true
         ) {
             VerticalText(
-                text = "пырит",
+                text = "ох",
                 fontSize = MaterialTheme.typography.labelSmall.fontSize,
             )
         }
-        ImageView(
+        ImageViewWithLine(
             image = ImageOpt.DUB_NOIR_6,
             isRightLine = false
         ) {
             VerticalText(
-                text = "сюда",
-                fontSize = MaterialTheme.typography.labelMedium.fontSize,
+                text = "ах",
+                fontSize = MaterialTheme.typography.labelSmall.fontSize,
             )
         }
         ImageView(image = ImageOpt.VI_NOIR_5)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(Config.defaultSpacerDp * 6)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            MaterialTheme.colorScheme.surfaceVariant,
+                            MaterialTheme.colorScheme.surface
+                        )
+                    )
+                )
+        )
     }
 }
