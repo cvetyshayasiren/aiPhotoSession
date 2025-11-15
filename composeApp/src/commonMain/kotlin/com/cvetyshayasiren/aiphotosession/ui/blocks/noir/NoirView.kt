@@ -129,18 +129,18 @@ fun NoirView(modifier: Modifier = Modifier) {
 
 
         ImageViewWithLine(
+            modifier = Modifier
+                .clip(
+                    shape = RoundedCornerShape(bottomEnd = Config.bigRound)
+                )
+                .shadow(
+                    elevation = Config.shadowElevation,
+                    shape = RoundedCornerShape(bottomEnd = Config.bigRound)
+                ),
             image = ImageOpt.DUB_NOIR_4,
             isRightLine = true
         ) {
             VerticalText(
-                modifier = Modifier
-                    .clip(
-                        shape = RoundedCornerShape(bottomEnd = Config.bigRound)
-                    )
-                    .shadow(
-                        elevation = Config.shadowElevation,
-                        shape = RoundedCornerShape(bottomEnd = Config.bigRound)
-                    ),
                 text = "rasSELSYA",
                 color = MaterialTheme.colorScheme.tertiary
             )
