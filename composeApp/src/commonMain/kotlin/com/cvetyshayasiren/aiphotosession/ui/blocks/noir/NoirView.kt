@@ -102,7 +102,7 @@ fun NoirView(modifier: Modifier = Modifier) {
 
         ImageViewCaptioned(image = ImageOpt.DUB_NOIR_5) {
             Text(
-                text = "Какой важный сел тут, ты ток глянь",
+                text = ImageOpt.DUB_NOIR_5.comment,
                 fontFamily = rubikMonoOne,
                 fontSize = MaterialTheme.typography.bodySmall.fontSize,
             )
@@ -110,7 +110,7 @@ fun NoirView(modifier: Modifier = Modifier) {
 
         Config.bigSpacer()
         Text(
-            modifier = Modifier.padding(12.dp).fillMaxWidth(.8f),
+            modifier = Modifier.padding(Config.bigPadding).fillMaxWidth(.8f),
             text = "Сидят они, стоят они и пырят, а там дальше ещё разлёгся, вобщ канеш, что позволяет себе? А? А?",
             fontFamily = rubikMonoOne,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
@@ -121,7 +121,7 @@ fun NoirView(modifier: Modifier = Modifier) {
             image = ImageOpt.VI_NOIR_1
         ) {
             Text(
-                text = "Куда ты лёг емое?",
+                text = ImageOpt.VI_NOIR_1.comment,
                 fontFamily = rubikMonoOne,
                 fontSize = MaterialTheme.typography.labelSmall.fontSize,
             )
@@ -158,7 +158,7 @@ fun NoirView(modifier: Modifier = Modifier) {
 
         ImageViewLabeled(image = ImageOpt.PAIR_0) {
             Text(
-                text = "Гдет такую он шляпу раздобыл и притопал, шикарно немног",
+                text = ImageOpt.PAIR_0.comment,
                 fontFamily = rubikMonoOne,
                 fontSize = MaterialTheme.typography.labelSmall.fontSize,
             )
@@ -170,8 +170,8 @@ fun NoirView(modifier: Modifier = Modifier) {
             image = ImageOpt.DUB_NOIR_7
         ) {
             Text(
-                modifier = Modifier.padding(12.dp),
-                text = "Смри ещё, этот паря уселся на мосту будто король тут он главный самый",
+                modifier = Modifier.padding(Config.bigPadding),
+                text = ImageOpt.DUB_NOIR_7.comment,
                 fontFamily = rubikMonoOne,
                 fontSize = MaterialTheme.typography.bodyLarge.fontSize,
                 color = MaterialTheme.colorScheme.primary
@@ -180,7 +180,7 @@ fun NoirView(modifier: Modifier = Modifier) {
 
         Config.bigSpacer()
         Text(
-            modifier = Modifier.padding(12.dp).fillMaxWidth(.6f).align(Alignment.End),
+            modifier = Modifier.padding(Config.bigPadding).fillMaxWidth(.6f).align(Alignment.End),
             text = "А дальше вообще ор, идёт как машина, прям на нас идёт, поход пора сваливать",
             fontFamily = rubikMonoOne,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
@@ -191,7 +191,7 @@ fun NoirView(modifier: Modifier = Modifier) {
 
         Config.bigSpacer()
         Text(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(Config.bigPadding),
             text = "Чую я ты хочешь ещё попырить на нейрочувачков, ну чтож мне не жалк совсем",
             fontFamily = rubikMonoOne,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,

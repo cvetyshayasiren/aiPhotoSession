@@ -66,14 +66,14 @@ fun SplashScreen(
                 color = MaterialTheme.colorScheme.primary
             )
             Text(
-                modifier = Modifier.basicMarquee().padding(12.dp),
+                modifier = Modifier.basicMarquee().padding(Config.bigPadding),
                 text = " PHOTO",
                 fontSize = MaterialTheme.typography.displayMedium.fontSize,
                 fontFamily = rubikMonoOne,
                 color = MaterialTheme.colorScheme.secondary
             )
             Text(
-                modifier = Modifier.basicMarquee().padding(12.dp),
+                modifier = Modifier.basicMarquee().padding(Config.bigPadding),
                 text = "  SESSION",
                 fontSize = MaterialTheme.typography.displaySmall.fontSize,
                 fontFamily = rubikMonoOne,

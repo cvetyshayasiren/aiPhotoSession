@@ -1,26 +1,37 @@
 package com.cvetyshayasiren.aiphotosession.ui.utils
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onFirstVisible
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.toIntRect
+import androidx.compose.ui.unit.toSize
 import androidx.compose.ui.util.lerp
+import androidx.compose.ui.window.DialogProperties
 import com.cvetyshayasiren.aiphotosession.Config
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.main.MainViewModel
@@ -28,15 +39,21 @@ import com.cvetyshayasiren.aiphotosession.ui.theme.rubikMonoOne
 import com.github.panpf.sketch.AsyncImage
 import com.github.panpf.sketch.rememberAsyncImageState
 import com.github.panpf.sketch.request.LoadState
+import com.github.panpf.sketch.util.Size
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
 import dev.chrisbanes.haze.materials.HazeMaterials
 import dev.chrisbanes.haze.rememberHazeState
 import kotlinx.coroutines.launch
+import me.saket.telephoto.zoomable.ZoomableContentLocation
+import me.saket.telephoto.zoomable.rememberZoomableState
+import me.saket.telephoto.zoomable.zoomable
 import kotlin.math.PI
+import kotlin.math.exp
 import kotlin.math.sin
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImageView(
     image: ImageOpt,
@@ -50,6 +67,7 @@ fun ImageView(
 ) {
     val state = rememberAsyncImageState()
     val loadState: LoadState? = state.loadState
+    val expandDialog = remember { mutableStateOf(false) }
 
     when (loadState) {
         is LoadState.Started -> { MainViewModel.addInLoadingQueue(image) }
@@ -60,12 +78,61 @@ fun ImageView(
         state = state,
         modifier = modifier
             .then(other = if(useImageAspectRatio) Modifier.aspectRatio(image.getRatio()) else Modifier)
-        ,
+            .clickable { expandDialog.value = !expandDialog.value },
         uri = image.getUri(),
         contentDescription = "photo",
         contentScale = contentScale,
         colorFilter = colorFilter
     )
+
+    AnimatedVisibility(
+        visible = expandDialog.value
+    ) {
+        BasicAlertDialog(
+            modifier = Modifier.fillMaxSize(),
+            onDismissRequest = { expandDialog.value = false },
+            properties = DialogProperties(
+                dismissOnBackPress = true,
+                dismissOnClickOutside = true,
+                usePlatformDefaultWidth = false
+            )
+        ) {
+            AsyncImage(
+                state = state,
+                modifier = modifier
+                    .fillMaxSize()
+                    .zoomable(
+                        clipToBounds = false,
+                        state = rememberZoomableState(),
+                        onClick = { expandDialog.value = false }
+                    ),
+                uri = image.getUri(),
+                contentDescription = "photo",
+                contentScale = ContentScale.Fit
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(Config.bigPadding),
+                contentAlignment = Alignment.BottomEnd
+            ) {
+                Box(
+                    modifier = Modifier
+                        .clip(Config.smallRoundedShape)
+                        .background(MaterialTheme.colorScheme.surfaceContainer)
+                        .wrapContentSize()
+                        .padding(Config.smallPadding)
+                ) {
+                    Text(
+                        text = image.comment,
+                        fontFamily = rubikMonoOne,
+                        fontSize = MaterialTheme.typography.labelSmall.fontSize,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+        }
+    }
 }
 
 @OptIn(ExperimentalHazeMaterialsApi::class)

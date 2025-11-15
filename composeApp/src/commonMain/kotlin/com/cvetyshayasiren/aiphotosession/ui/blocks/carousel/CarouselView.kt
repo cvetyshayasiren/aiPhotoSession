@@ -1,8 +1,10 @@
 package com.cvetyshayasiren.aiphotosession.ui.blocks.carousel
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.carousel.HorizontalCenteredHeroCarousel
@@ -18,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.cvetyshayasiren.aiphotosession.Config
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.theme.rubikMonoOne
+import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
 import com.github.panpf.sketch.AsyncImage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -40,12 +43,27 @@ fun CarouselView(
     ) {
         Config.smallSpacer()
         Text(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(Config.bigPadding),
             text = "И на последок ещё кучка тебе в дорожку попырить паря",
             fontFamily = rubikMonoOne,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
             color = MaterialTheme.colorScheme.primary
         )
+        Config.smallSpacer()
+
+        HorizontalDivider()
+        AnimatedContent(
+            targetState = carouselState.currentItem
+        ) {item ->
+            Text(
+                modifier = Modifier.padding(Config.bigPadding),
+                text = trashList[item].comment,
+                fontFamily = rubikMonoOne,
+                fontSize = MaterialTheme.typography.bodySmall.fontSize,
+                color = MaterialTheme.colorScheme.tertiary
+            )
+        }
+
 
         HorizontalCenteredHeroCarousel(
             modifier = Modifier
@@ -63,14 +81,16 @@ fun CarouselView(
             ,
             state = carouselState
         ) {listIndex ->
-            AsyncImage(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .maskClip(Config.smallRoundedShape),
-                uri = trashList[listIndex].getUri(),
-                contentScale = ContentScale.Crop,
-                contentDescription = ""
-            )
+            Box(
+                modifier = Modifier.maskClip(Config.bigRoundedShape)
+            ) {
+                ImageView(
+                    image = trashList[listIndex],
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop,
+                    useImageAspectRatio = false
+                )
+            }
         }
         Config.smallSpacer()
     }

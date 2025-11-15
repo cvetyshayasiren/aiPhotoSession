@@ -36,6 +36,7 @@ kotlin {
             implementation(libs.materialkolor)
             implementation(compose.materialIconsExtended)
             implementation(libs.bundles.haze)
+            implementation(libs.telephoto)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

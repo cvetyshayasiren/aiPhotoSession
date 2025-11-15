@@ -35,7 +35,7 @@ fun CyberView(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.Start,
     ) {
         Row(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(Config.bigPadding),
             verticalAlignment = Alignment.Bottom
         ) {
             Text(
@@ -59,7 +59,7 @@ fun CyberView(modifier: Modifier = Modifier) {
 
         Config.bigSpacer()
         Text(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(Config.bigPadding),
             text = "Тут я хз как, но они вдруг стали кибернетическе собаке будт",
             fontFamily = rubikMonoOne,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,

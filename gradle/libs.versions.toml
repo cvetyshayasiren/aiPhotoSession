@@ -8,6 +8,7 @@ kotlinx-coroutines = "1.10.2"
 sketch = "4.4.0-alpha01"
 materialkolor = "4.0.3"
 haze = "1.6.10"
+telephoto = "0.18.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -21,6 +22,7 @@ sketch-http = { module = "io.github.panpf.sketch4:sketch-http", version.ref = "s
 materialkolor = { module = "com.materialkolor:material-kolor", version.ref = "materialkolor" }
 haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
 haze-materials = { module = "dev.chrisbanes.haze:haze-materials", version.ref = "haze" }
+telephoto = { module = "me.saket.telephoto:zoomable", version.ref = "telephoto" }
 
 [bundles]
 sketch = ["sketch-compose", "sketch-http"]

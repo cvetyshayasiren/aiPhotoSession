@@ -19,6 +19,8 @@ object Config {
     val bigRoundedShape = RoundedCornerShape(bigRound)
 
     val smallPadding = 4.dp
+
+    val bigPadding = 12.dp
     val shadowElevation = 2.dp
 
     val smallSpacerDp = 24.dp
