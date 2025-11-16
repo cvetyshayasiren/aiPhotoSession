@@ -1,6 +1,11 @@
 package com.cvetyshayasiren.aiphotosession.ui.blocks.carousel
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.*
@@ -25,11 +30,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onFirstVisible
 import androidx.compose.ui.unit.dp
 import com.cvetyshayasiren.aiphotosession.Config
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.theme.rubikMonoOne
 import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
+import com.cvetyshayasiren.aiphotosession.ui.utils.animated
 import com.cvetyshayasiren.aiphotosession.ui.utils.brutalShadow
 import com.github.panpf.sketch.AsyncImage
 import kotlinx.coroutines.CoroutineScope
@@ -53,8 +60,8 @@ fun CarouselView(
     ) {
         Config.smallSpacer()
         Text(
-            modifier = Modifier.padding(Config.bigPadding),
-            text = "И на последок ещё кучка тебе в дорожку попырить паря",
+            modifier = Modifier.animated().padding(Config.bigPadding),
+            text = "И на последок ещё кучка тебе в дорожку попырить",
             fontFamily = rubikMonoOne,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
             color = MaterialTheme.colorScheme.primary
@@ -64,17 +71,7 @@ fun CarouselView(
         HorizontalCenteredHeroCarousel(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1.5f)
-//                .pointerInput(Unit) {
-//                    detectHorizontalDragGestures { _, dragAmount ->
-//                        val isForward = dragAmount <= 0
-//                        val pageToScroll = if(isForward) 1 else -1
-//                        scope.launch {
-//                            carouselState.animateScrollToItem(carouselState.currentItem + pageToScroll)
-//                        }
-//                    }
-//                }
-            ,
+                .aspectRatio(1.5f),
             state = carouselState
         ) {listIndex ->
             Box(
@@ -84,7 +81,8 @@ fun CarouselView(
                     image = trashList[listIndex],
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop,
-                    useImageAspectRatio = false
+                    useImageAspectRatio = false,
+                    separateDialogState = true
                 )
             }
         }
@@ -92,27 +90,26 @@ fun CarouselView(
         AnimatedContent(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(96.dp)
-                .padding(Config.smallPadding)
+                .padding(Config.smallSpacerDp)
                 .brutalShadow()
-                .background(MaterialTheme.colorScheme.surfaceContainer)
+                .padding(Config.bigPadding)
+                .height(96.dp)
                 .verticalScroll(rememberScrollState()),
             contentAlignment = Alignment.Center,
             targetState = carouselState.currentItem
         ) {item ->
             Text(
-                modifier = Modifier
-                    .padding(Config.bigPadding)
-                ,
+                modifier = Modifier.fillMaxSize(),
                 text = trashList[item].comment,
                 fontFamily = rubikMonoOne,
                 fontSize = MaterialTheme.typography.bodySmall.fontSize,
-                color = MaterialTheme.colorScheme.tertiary
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
 
         Row(
-            Modifier.fillMaxWidth(),
+            Modifier
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement
                 .spacedBy(

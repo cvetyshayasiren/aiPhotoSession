@@ -7,13 +7,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
+import com.cvetyshayasiren.aiphotosession.ui.utils.animated
 
 @Composable
 fun ShapesWidget(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.animated(),
     photos: List<ImageOpt>
 ) {
     val shapes = remember { List(photos.size) { getRandomCornerShape() } }
@@ -26,7 +28,8 @@ fun ShapesWidget(
                 modifier = Modifier
                     .weight(1f)
                     .clip(shapes[index]),
-                image = image
+                image = image,
+                separateDialogState = true
             )
         }
     }
@@ -39,6 +42,6 @@ fun getRandomCornerShape() = listOf(
         bottomStart = (0..48).random().dp,
         bottomEnd = (0..48).random().dp
     ),
-    RoundedCornerShape(0.dp),
+    RectangleShape,
     CircleShape
 ).random()

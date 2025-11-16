@@ -26,6 +26,7 @@ import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
 import com.cvetyshayasiren.aiphotosession.ui.utils.ImageViewLabeled
 import com.cvetyshayasiren.aiphotosession.ui.utils.ImageViewWithLine
 import com.cvetyshayasiren.aiphotosession.ui.utils.VerticalText
+import com.cvetyshayasiren.aiphotosession.ui.utils.animated
 import com.cvetyshayasiren.aiphotosession.ui.widgets.ShapesWidget
 
 @Composable
@@ -59,7 +60,7 @@ fun CyberView(modifier: Modifier = Modifier) {
 
         Config.bigSpacer()
         Text(
-            modifier = Modifier.padding(Config.bigPadding),
+            modifier = Modifier.animated().padding(Config.bigPadding),
             text = "Тут я хз как, но они вдруг стали кибернетическе собаке будт",
             fontFamily = rubikMonoOne,
             fontSize = MaterialTheme.typography.bodyLarge.fontSize,
@@ -67,7 +68,7 @@ fun CyberView(modifier: Modifier = Modifier) {
         )
 
         Row(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.animated().fillMaxWidth()
         ) {
             ImageView(
                 modifier = Modifier.weight(1f),

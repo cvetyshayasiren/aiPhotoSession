@@ -12,10 +12,11 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.ColorFilter
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
 import com.cvetyshayasiren.aiphotosession.ui.utils.ImageView
+import com.cvetyshayasiren.aiphotosession.ui.utils.animated
 
 @Composable
 fun FourSquareView(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.animated(),
     photo: ImageOpt
 ) {
     Column(
@@ -61,6 +62,7 @@ fun FourSquareView(
                     color = MaterialTheme.colorScheme.error,
                     blendMode = BlendMode.Hue
                 ),
+                separateDialogState = true
             )
         }
     }

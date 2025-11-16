@@ -70,7 +70,7 @@ fun ImageView(
     useImageAspectRatio: Boolean = true,
     contentScale: ContentScale = ContentScale.Crop,
     colorFilter: ColorFilter? = null,
-    separateDialogState: Boolean = true
+    separateDialogState: Boolean = false
 ) {
     val state = rememberAsyncImageState()
     val loadState: LoadState? = state.loadState
@@ -85,12 +85,7 @@ fun ImageView(
         state = state,
         modifier = modifier
             .then(other = if(useImageAspectRatio) Modifier.aspectRatio(image.getRatio()) else Modifier)
-            .clickable { expandDialog.value = !expandDialog.value }
-            .pointerInput(Unit) {
-                detectTransformGestures { _, _ , _, _ ->
-                    expandDialog.value = !expandDialog.value
-                }
-            },
+            .clickable { expandDialog.value = !expandDialog.value },
         uri = image.getUri(),
         contentDescription = "photo",
         contentScale = contentScale,

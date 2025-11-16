@@ -50,7 +50,7 @@ fun MainViewModel.progress(
     loadingQueue.map { imageOpts ->
         ProgressLoading(
             fraction = 1f - (imageOpts.size.toFloat() / maxQueueSize)
-                .let { remains -> if(remains.isFinite()) remains else 0f }
+                .let { remains -> if(remains.isFinite()) remains else 0f }.coerceIn(0f, 1f)
         )
     }.stateIn(
         scope = scope,

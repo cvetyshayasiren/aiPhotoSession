@@ -1,9 +1,11 @@
 package com.cvetyshayasiren.aiphotosession.ui.utils
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -17,6 +19,7 @@ import com.cvetyshayasiren.aiphotosession.Config
 fun Modifier.brutalShadow(
     shadowColor: Color = MaterialTheme.colorScheme.primary,
     borderColor: Color = MaterialTheme.colorScheme.error,
+    backgroundColor: Color = MaterialTheme.colorScheme.surfaceContainer,
     shape: Shape = Config.smallRoundedShape,
     width: Dp = Config.smallPadding
 ): Modifier = this then Modifier
@@ -30,3 +33,5 @@ fun Modifier.brutalShadow(
         )
     )
     .border(width = width, color = borderColor, shape = shape)
+    .clip(shape)
+    .background(backgroundColor)

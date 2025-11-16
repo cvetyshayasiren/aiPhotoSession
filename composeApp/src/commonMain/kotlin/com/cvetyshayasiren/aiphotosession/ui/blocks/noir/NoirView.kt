@@ -29,6 +29,7 @@ import com.cvetyshayasiren.aiphotosession.ui.utils.ImageViewWithLine
 import com.cvetyshayasiren.aiphotosession.ui.utils.VerticalText
 import com.cvetyshayasiren.aiphotosession.ui.utils.WalkingImage
 import com.cvetyshayasiren.aiphotosession.ui.utils.animated
+import com.cvetyshayasiren.aiphotosession.ui.utils.brutalShadow
 import com.cvetyshayasiren.aiphotosession.ui.widgets.FourSquareView
 import com.cvetyshayasiren.aiphotosession.ui.widgets.NamesWidget
 import org.jetbrains.compose.resources.InternalResourceApi
@@ -168,14 +169,23 @@ fun NoirView(modifier: Modifier = Modifier) {
 
         FourSquareView(photo = ImageOpt.DUB_NOIR_3)
 
+        Config.bigSpacer()
         Text(
-            modifier = Modifier.padding(Config.bigPadding).animated(),
-            text = "Тыж своими пальчатками на фото мож тыкать, рассмотреть если над",
+            modifier = Modifier
+                .animated()
+                .padding(Config.smallSpacerDp)
+                .brutalShadow(
+                    shadowColor = MaterialTheme.colorScheme.tertiary,
+                    backgroundColor = MaterialTheme.colorScheme.secondary
+                )
+                .padding(Config.bigPadding),
+            text = "Тыж своими пальчатками на фото мож тыкнуть, рассмотреть если над",
             fontFamily = rubikMonoOne,
             fontStyle = FontStyle.Italic,
             fontSize = MaterialTheme.typography.labelSmall.fontSize,
-            color = MaterialTheme.colorScheme.tertiaryFixedDim
+            color = MaterialTheme.colorScheme.onSecondary
         )
+        Config.bigSpacer()
 
         ImageViewCaptioned(
             image = ImageOpt.DUB_NOIR_7

@@ -13,6 +13,7 @@ data class PaletteMode(
     val color: Color
 ) {
     companion object {
+        fun init(): PaletteMode = PaletteMode(paletteStyle = PaletteStyle.Vibrant, color = Color(82, 92, 120))
         fun random(): PaletteMode = PaletteMode(paletteStyle = randomPaletteStyle(), color = randomColor())
     }
 }
