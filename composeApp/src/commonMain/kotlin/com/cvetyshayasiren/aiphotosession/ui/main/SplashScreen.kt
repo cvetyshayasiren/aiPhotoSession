@@ -81,7 +81,7 @@ fun SplashScreen(
             )
             Text(
                 modifier = Modifier.padding(Config.smallSpacerDp),
-                text = "progress ${progress.value.prettyPercent()} ${phrases.value}",
+                text = "${progress.value.prettyPercent()} ${phrases.value}",
                 fontSize = MaterialTheme.typography.bodySmall.fontSize,
                 fontFamily = rubikMonoOne
             )

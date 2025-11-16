@@ -5,12 +5,9 @@ import androidx.compose.material.icons.rounded.DarkMode
 import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
 import com.materialkolor.DynamicMaterialTheme
-import com.materialkolor.PaletteStyle
 import com.materialkolor.dynamiccolor.ColorSpec
 import com.materialkolor.rememberDynamicMaterialThemeState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,29 +42,13 @@ fun AiPhotoSessionExpressiveTheme(
 ) {
     val state = ThemeState.state.collectAsState()
 
-    val palette = remember {
-        listOf(
-            PaletteStyle.Vibrant,
-            PaletteStyle.Expressive,
-            PaletteStyle.FruitSalad,
-            PaletteStyle.Content
-
-        ).random()
-    }
-    val color = remember {
-        listOf(
-            Color(82, 92, 120),
-            Color(10, 90, 50),
-            Color(160, 20, 70),
-            Color(200, 200, 100),
-        ).random()
-    }
+    val paletteState = PaletteState.state.collectAsState()
 
     val dynamicThemeState = rememberDynamicMaterialThemeState(
         isDark = state.value.isDark(),
-        style = palette,
+        style = paletteState.value.paletteStyle,
         specVersion = ColorSpec.SpecVersion.SPEC_2025,
-        seedColor = color,
+        seedColor = paletteState.value.color,
     )
 
     DynamicMaterialTheme(

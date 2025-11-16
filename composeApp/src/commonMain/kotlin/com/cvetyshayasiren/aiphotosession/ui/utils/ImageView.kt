@@ -7,10 +7,15 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Cancel
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +30,7 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onFirstVisible
 import androidx.compose.ui.text.style.TextAlign
@@ -63,7 +69,8 @@ fun ImageView(
         .shadow(Config.shadowElevation),
     useImageAspectRatio: Boolean = true,
     contentScale: ContentScale = ContentScale.Crop,
-    colorFilter: ColorFilter? = null
+    colorFilter: ColorFilter? = null,
+    separateDialogState: Boolean = true
 ) {
     val state = rememberAsyncImageState()
     val loadState: LoadState? = state.loadState
@@ -78,7 +85,12 @@ fun ImageView(
         state = state,
         modifier = modifier
             .then(other = if(useImageAspectRatio) Modifier.aspectRatio(image.getRatio()) else Modifier)
-            .clickable { expandDialog.value = !expandDialog.value },
+            .clickable { expandDialog.value = !expandDialog.value }
+            .pointerInput(Unit) {
+                detectTransformGestures { _, _ , _, _ ->
+                    expandDialog.value = !expandDialog.value
+                }
+            },
         uri = image.getUri(),
         contentDescription = "photo",
         contentScale = contentScale,
@@ -89,7 +101,7 @@ fun ImageView(
         visible = expandDialog.value
     ) {
         BasicAlertDialog(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface.copy(alpha = .8f)),
             onDismissRequest = { expandDialog.value = false },
             properties = DialogProperties(
                 dismissOnBackPress = true,
@@ -98,7 +110,7 @@ fun ImageView(
             )
         ) {
             AsyncImage(
-                state = state,
+                state = if(separateDialogState) rememberAsyncImageState() else state,
                 modifier = modifier
                     .fillMaxSize()
                     .zoomable(
@@ -120,8 +132,9 @@ fun ImageView(
                     modifier = Modifier
                         .clip(Config.smallRoundedShape)
                         .background(MaterialTheme.colorScheme.surfaceContainer)
+                        .fillMaxWidth()
                         .wrapContentSize()
-                        .padding(Config.smallPadding)
+                        .padding(horizontal = Config.bigPadding, vertical = Config.smallSpacerDp)
                 ) {
                     Text(
                         text = image.comment,
@@ -130,6 +143,18 @@ fun ImageView(
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
+                IconButton(
+                    modifier = Modifier.align(Alignment.TopEnd).padding(Config.smallPadding),
+                    onClick = {
+                        expandDialog.value = false
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Cancel,
+                        contentDescription = "close"
+                    )
+                }
+
             }
         }
     }
@@ -144,6 +169,7 @@ fun ImageViewCaptioned(
     useImageAspectRatio: Boolean = true,
     contentScale: ContentScale = ContentScale.Crop,
     colorFilter: ColorFilter? = null,
+    separateDialogState: Boolean = false,
     content: @Composable (BoxScope.() -> Unit)
 ) {
     val hazeState = rememberHazeState()
@@ -159,7 +185,8 @@ fun ImageViewCaptioned(
             image = image,
             useImageAspectRatio = useImageAspectRatio,
             contentScale = contentScale,
-            colorFilter = colorFilter
+            colorFilter = colorFilter,
+            separateDialogState = separateDialogState
         )
         Box(
             modifier = Modifier
@@ -185,6 +212,7 @@ fun ImageViewLabeled(
     useImageAspectRatio: Boolean = true,
     contentScale: ContentScale = ContentScale.Crop,
     colorFilter: ColorFilter? = null,
+    separateDialogState: Boolean = false,
     content: @Composable (BoxScope.() -> Unit)
 ) {
     val hazeState = rememberHazeState()
@@ -200,7 +228,8 @@ fun ImageViewLabeled(
             image = image,
             useImageAspectRatio = useImageAspectRatio,
             contentScale = contentScale,
-            colorFilter = colorFilter
+            colorFilter = colorFilter,
+            separateDialogState = separateDialogState
         )
         Box(
             modifier = Modifier
@@ -223,6 +252,7 @@ fun ImageViewWithLine(
     useImageAspectRatio: Boolean = true,
     contentScale: ContentScale = ContentScale.Crop,
     colorFilter: ColorFilter? = null,
+    separateDialogState: Boolean = false,
     isRightLine: Boolean = true,
     content: @Composable (RowScope.() -> Unit)
 ) {
@@ -251,7 +281,8 @@ fun ImageViewWithLine(
             image = image,
             useImageAspectRatio = useImageAspectRatio,
             contentScale = contentScale,
-            colorFilter = colorFilter
+            colorFilter = colorFilter,
+            separateDialogState = separateDialogState
         )
         if(isRightLine) {
             Row(
@@ -275,7 +306,8 @@ fun WalkingImage(
     image: ImageOpt,
     useImageAspectRatio: Boolean = true,
     contentScale: ContentScale = ContentScale.Crop,
-    colorFilter: ColorFilter? = null
+    colorFilter: ColorFilter? = null,
+    separateDialogState: Boolean = false,
 ) {
     val animateFloat = remember { Animatable(0f) }
     val scope = rememberCoroutineScope()
@@ -308,7 +340,8 @@ fun WalkingImage(
         image = image,
         useImageAspectRatio = useImageAspectRatio,
         contentScale = contentScale,
-        colorFilter = colorFilter
+        colorFilter = colorFilter,
+        separateDialogState = separateDialogState
     )
 }
 
@@ -320,7 +353,8 @@ fun EmoeImage(
     image: ImageOpt,
     useImageAspectRatio: Boolean = true,
     contentScale: ContentScale = ContentScale.Crop,
-    colorFilter: ColorFilter? = null
+    colorFilter: ColorFilter? = null,
+    separateDialogState: Boolean = false,
 ) {
     val emoeList = remember { listOf("емое", "емоё", "ёмое", "ёмоё") }
     val colors = listOf(
@@ -337,7 +371,8 @@ fun EmoeImage(
             image = image,
             useImageAspectRatio = useImageAspectRatio,
             contentScale = contentScale,
-            colorFilter = colorFilter
+            colorFilter = colorFilter,
+            separateDialogState = separateDialogState
         )
 
         Column(

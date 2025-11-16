@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.cvetyshayasiren.aiphotosession.Config
 import com.cvetyshayasiren.aiphotosession.data.ImageOpt
@@ -27,6 +28,7 @@ import com.cvetyshayasiren.aiphotosession.ui.utils.ImageViewLabeled
 import com.cvetyshayasiren.aiphotosession.ui.utils.ImageViewWithLine
 import com.cvetyshayasiren.aiphotosession.ui.utils.VerticalText
 import com.cvetyshayasiren.aiphotosession.ui.utils.WalkingImage
+import com.cvetyshayasiren.aiphotosession.ui.utils.animated
 import com.cvetyshayasiren.aiphotosession.ui.widgets.FourSquareView
 import com.cvetyshayasiren.aiphotosession.ui.widgets.NamesWidget
 import org.jetbrains.compose.resources.InternalResourceApi
@@ -165,6 +167,15 @@ fun NoirView(modifier: Modifier = Modifier) {
         }
 
         FourSquareView(photo = ImageOpt.DUB_NOIR_3)
+
+        Text(
+            modifier = Modifier.padding(Config.bigPadding).animated(),
+            text = "Тыж своими пальчатками на фото мож тыкать, рассмотреть если над",
+            fontFamily = rubikMonoOne,
+            fontStyle = FontStyle.Italic,
+            fontSize = MaterialTheme.typography.labelSmall.fontSize,
+            color = MaterialTheme.colorScheme.tertiaryFixedDim
+        )
 
         ImageViewCaptioned(
             image = ImageOpt.DUB_NOIR_7
